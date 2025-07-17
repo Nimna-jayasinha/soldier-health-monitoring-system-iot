@@ -108,13 +108,19 @@ This project was developed as part of:
 - **Course:** Fundamentals of Computing - IT1140 (Year 1, Semester 1, 2024)
 - **Institution:** Sri Lanka Institute of Information Technology
 - **Group Code:** P15
-- **Team Members:**
-   - Kavindu Umayanga Amarakeerthi *(University Record: Amarakeerthi H. K. K. U.)* – Embedded Developer
-   - Eranjana Weerasinghe *(University Record: Weerasinghe A. E. K. P.)*
-   - Nimna Jayasinha *(University Record: Jayasinha W. M. S. S. N.)*
-   - Geenuth Perera *(University Record: Perera W. G. D.)*
-   - Vidara Karannagoda *(University Record: Karannagoda K. V. R.)*
-   - Chamodika *(University Record: Chamodika J. W. C.)*
+
+---
+
+## 👨‍💻 Team Members & Contributions
+
+| Name                              | University Record                     | Role & Contribution                                                                 |
+|-----------------------------------|----------------------------------------|--------------------------------------------------------------------------------------|
+| Kavindu Umayanga Amarakeerthi     | Amarakeerthi H. K. K. U.              | **Embedded Developer** – Led the hardware and firmware development by designing the complete circuit, writing and testing the Arduino code, integrating sensor data with the Blynk Cloud platform, and implementing the glove wiring and sensor setup. Also collaborated on building the wearable glove hardware. |
+| Eranjana Weerasinghe              | Weerasinghe A. E. K. P.               | **Hardware Integrator** – Conceived the core idea and served as the inspiration behind the entire project. Designed the physical glove’s user experience and interface, led the glove’s external design aesthetics, and managed internal wiring and component integration for the wearable unit. |
+| Nimna Jayasinha                   | Jayasinha W. M. S. S. N.              | **Web Developer** – Developed the project’s companion website and actively contributed to glove assembly by assisting with fitting, sensor wiring, and component setup. Played a key role in ideation and supported the glove's design process. |
+| Geenuth Perera                    | Perera W. G. D.                       | **Documentation & Logistics** – Created the project proposal, handled component sourcing and billing sheet preparation. |
+| Vidara Karannagoda                | Karannagoda K. V. R.                  | **Presentation & Support** – Helped in documentation and provided a Plaster of Paris human dummy to demonstrate glove wearability. |
+| Chamodika                         | Chamodika J. W. C.                    | **Documentation Assistant** – Supported report writing and formatting tasks. |
 
 ---
 
