@@ -91,14 +91,19 @@ Refer to [`Docs/Blynk_Configuration.md`](./Docs/Blynk_Configuration.md) for full
 ## 📁 Folder Structure
 
 ```
-📆Military Soldier Health Monitoring System
-🔜 Arduino_Code
-🔜 Docs
-🔜 Reports
-🔜 Images
-├── .gitignore
-├── LICENSE
-└── README.md
+📦 soldier-health-monitoring-system-iot
+├── Arduino_Code/                 # Full Arduino source code
+├── Docs/                         # Documentation files (PDFs, Markdown)
+│   ├── Blynk_Configuration.md    # Blynk setup guide
+│   └── wiring_guide.md           # Wiring and circuit guide
+├── Reports/                      # Project reports and proposal documents
+├── Images/                       # All project-related images and diagrams
+│   └── components_billing.png    # Image of component billing summary
+├── Schematics/                   # Circuit diagrams and hardware illustrations
+│   └── circuit_diagram.png
+├── .gitignore                    # Git ignored files configuration
+├── LICENSE                       # Project license (MIT)
+└── README.md                     # Main project description and guide
 ```
 
 ---
