@@ -64,7 +64,7 @@ This guide outlines how to physically connect all sensors and modules to the ESP
 ## 🔗 Reference
 
 - See [`Docs/Blynk_Configuration.md`](./Blynk_Configuration.md) for cloud setup
-- See [`Arduino_Code/KENG-CV-007_Military_Health_Monitor.ino`](../Arduino_Code/KENG-CV-007_Military_Health_Monitor.ino) for pin mappings in code
+- See [`Arduino_Code/KENG-CV-007_Military_Health_Monitor.ino`](../Arduino_Code/KENG-CV-007_Military_Health_Monitor,ino) for pin mappings in code
 
 ---
 

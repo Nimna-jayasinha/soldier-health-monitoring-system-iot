@@ -1,6 +1,6 @@
-# 🛡️ Military Soldier Health Monitoring System (KENG-CV #007)
+# Military Soldier Health Monitoring System (KENG-CV #007) 🔰
 
-A real-time IoT-based health and safety monitoring system for military soldiers using ESP32 and Blynk Cloud. This system continuously monitors heart rate, temperature, GPS location, and glove status, and displays the data on a web dashboard via Blynk Cloud.
+A real-time IoT-based health and safety monitoring system for military soldiers. This wearable device, powered by an ESP32 microcontroller, continuously tracks a soldier’s vital signs — including heart rate, body temperature, GPS location, and glove status — and transmits the data to a centralized Blynk Cloud dashboard for real-time monitoring and safety alerts.
 
 ---
 
@@ -10,33 +10,43 @@ This system helps track vital signs of soldiers on the field, ensuring real-time
 
 **Main Features:**
 
-- Real-time heart rate monitoring with Pulse Sensor
-- Body temperature measurement using LM35
-- GPS-based location tracking
-- Glove detection via IR sensor for safety compliance
-- OLED display for local viewing
-- Blynk dashboard for cloud-based monitoring
+- 💓 Real-time heart rate monitoring with Pulse Sensor
+- 🌡️ Body temperature measurement using LM35
+- 📍 GPS-based location tracking (Neo-6M)
+- 🧤 Glove detection via IR sensor for safety compliance
+- ⬛ OLED display for local data view
+- 🖥📊📉 Blynk dashboard for live cloud-based monitoring
 
 ---
 
 ## 🚀 Getting Started
 
-### Hardware Requirements:
-
-- ESP32 Dev Board
-- Pulse Sensor
-- LM35 Temperature Sensor
-- NEO-6M GPS Module
-- IR Sensor
-- 0.96" I2C OLED Display (128x64)
+## ⚙️ Hardware Requirements:
+| Component         | Quantity | Purpose                            |
+|------------------|----------|------------------------------------|
+| ESP32             | 1        | Main controller with WiFi         |
+| MAX30100 / Pulse Sensor | 1   | Heart rate sensing                |
+| LM35              | 1        | Temperature sensing               |
+| Neo-6M GPS        | 1        | Location tracking                 |
+| OLED 0.96” I2C    | 1        | Display heart/temp/location       |
+| IR Sensor         | 1        | Glove presence detection          |
+| 7V LiPo Battery   | 1        | Portable power                    |
 
 ### Software Requirements:
 
-- Arduino IDE
+- C++ (Arduino IDE)
+- Blynk IoT Platform
+- C++ (Arduino IDE)
 - Required Libraries:
   - `WiFi.h`, `Wire.h`, `BlynkSimpleEsp32.h`
   - `Adafruit_SSD1306`, `Adafruit_GFX`
   - `PulseSensorPlayground`, `TinyGPS++`
+
+---
+
+## 🔌 Circuit Diagram
+
+![Circuit Diagram](Schematics/circuit_diagram.png)
 
 ---
 
@@ -51,6 +61,20 @@ This system helps track vital signs of soldiers on the field, ensuring real-time
 | GPS TX                   | GPIO17    | Sends GPS data                   |
 | OLED SDA                 | GPIO21    | I2C data line                    |
 | OLED SCL                 | GPIO22    | I2C clock line                   |
+
+---
+
+## 💸 Component Billing Overview
+
+A summarized cost sheet of all hardware used in the project:
+
+![Component Billing Sheet](./Images/components_billing.png)
+
+---
+
+## 🔌 Wiring Guide
+
+For detailed circuit connections and sensor pin configurations, refer to the [Wiring Guide](./Docs/wiring_guide.md).
 
 ---
 
@@ -89,12 +113,22 @@ Refer to [`Docs/Blynk_Configuration.md`](./Docs/Blynk_Configuration.md) for full
 
 This project was developed as part of:
 
-- **Course:** IoT-Based Embedded Systems Design
-- **Institution:** [Your University Name]
-- **Group Code:** KENG-CV #007
-- **Team Members:**
-  - Madushan Sandaruwan – Embedded Developer
-  - [Add other members if any]
+- **Course:** Fundamentals of Computing - IT1140 (Year 1, Semester 1, 2024)
+- **Institution:** Sri Lanka Institute of Information Technology
+- **Group Code:** P15
+
+---
+
+## 👨‍💻 Team Members & Contributions
+
+| Name                              | University Record                     | Role & Contribution                                                                 |
+|-----------------------------------|----------------------------------------|--------------------------------------------------------------------------------------|
+| Kavindu Umayanga                  | Amarakeerthi H. K. K. U.              | **Embedded Developer** – Led the hardware and firmware development by designing the complete circuit, writing and testing the Arduino code, integrating sensor data with the Blynk Cloud platform, and implementing the glove wiring and sensor setup. Also collaborated on building the wearable glove hardware. |
+| Eranjana Weerasinghe              | Weerasinghe A. E. K. P.               | **Hardware Integrator** – Conceived the core idea and served as the inspiration behind the entire project. Designed the physical glove’s user experience and interface, led the glove’s external design aesthetics, and managed internal wiring and component integration for the wearable unit. |
+| Nimna Jayasinha                   | Jayasinha W. M. S. S. N.              | **Web Developer** – Developed the project’s companion website and actively contributed to glove assembly by assisting with fitting, sensor wiring, and component setup. Played a key role in ideation and supported the glove's design process. |
+| Geenuth Perera                    | Perera W. G. D.                       | **Documentation & Logistics** – Created the project proposal, handled component sourcing and billing sheet preparation. |
+| Vidara Karannagoda                | Karannagoda K. V. R.                  | **Presentation & Support** – Helped in documentation and provided a Plaster of Paris human dummy to demonstrate glove wearability. |
+| Chamodika                         | Chamodika J. W. C.                    | **Documentation Assistant** – Supported report writing and formatting tasks. |
 
 ---
 
@@ -114,5 +148,7 @@ This project is licensed under the [MIT License](./LICENSE).
 
 For questions or support, please contact:
 
-- Madushan Sandaruwan – [[your\_email@example.com](mailto\:your_email@example.com)]
+- Kavindu Umayanga – [[kavinumayanga@gmail.com](mailto\:kavinumayanga@gmail.com)]
+- Nimna Jayasinha – [[nimnajayasingha56@gmail.com](mailto\:nimnajayasingha56@gmail.com)]
+- Eranjana Weerasinghe - [[eranjanaweerasinghe@gmail.com](mailto\:eranjanaweerasinghe@gmail.com)]
 

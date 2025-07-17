@@ -1,6 +1,6 @@
-#define BLYNK_TEMPLATE_ID "TMPL6yE53_0cp"
-#define BLYNK_TEMPLATE_NAME "Military Soldier Health Monitoring System"
-#define BLYNK_AUTH_TOKEN "eiQbDyTdOa6p5gEiNaPMP1As9Ful-RkA"
+#define BLYNK_TEMPLATE_ID "YOUR_TEMPLATE_ID"
+#define BLYNK_TEMPLATE_NAME "YOUR_TEMPLATE_NAME"
+#define BLYNK_AUTH_TOKEN "YOUR_AUTH_TOKEN"
 
 // Include required libraries
 #include <Wire.h>
@@ -13,9 +13,10 @@
 #include <PulseSensorPlayground.h> // For PulseSensor
 
 // Blynk credentials
-char auth[] = "eiQbDyTdOa6p5gEiNaPMP1As9Ful-RkA"; // Replace with your Blynk authentication token
-char ssid[] = "Galaxy A21s01DD";               // Replace with your WiFi SSID
-char pass[] = "bqhn3990";  
+char auth[] = "YOUR_AUTH_TOKEN"; // Replace with your Blynk authentication token
+char ssid[] = "YOUR_WIFI_SSID";               // Replace with your WiFi SSID
+char pass[] = "YOUR_WIFI_PASSWORD";  
+
 // Pulse Sensor
 #define PULSE_PIN 32 // Pin connected to the pulse sensor
 PulseSensorPlayground pulseSensor;
