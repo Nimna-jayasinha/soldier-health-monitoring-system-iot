@@ -1,0 +1,204 @@
+#define BLYNK_TEMPLATE_ID "TMPL6yE53_0cp"
+#define BLYNK_TEMPLATE_NAME "Military Soldier Health Monitoring System"
+#define BLYNK_AUTH_TOKEN "eiQbDyTdOa6p5gEiNaPMP1As9Ful-RkA"
+
+// Include required libraries
+#include <Wire.h>
+#include <WiFi.h>
+#include <BlynkSimpleEsp32.h>
+#include <TinyGPS++.h> // Library for GPS module
+#include <HardwareSerial.h>
+#include <Adafruit_GFX.h>
+#include <Adafruit_SSD1306.h> // For OLED display
+#include <PulseSensorPlayground.h> // For PulseSensor
+
+// Blynk credentials
+char auth[] = "eiQbDyTdOa6p5gEiNaPMP1As9Ful-RkA"; // Replace with your Blynk authentication token
+char ssid[] = "Galaxy A21s01DD";               // Replace with your WiFi SSID
+char pass[] = "bqhn3990";  
+// Pulse Sensor
+#define PULSE_PIN 32 // Pin connected to the pulse sensor
+PulseSensorPlayground pulseSensor;
+
+// OLED display setup
+#define SCREEN_WIDTH 128 // OLED display width, in pixels
+#define SCREEN_HEIGHT 64 // OLED display height, in pixels
+Adafruit_SSD1306 display(SCREEN_WIDTH, SCREEN_HEIGHT, &Wire, -1);
+
+// Blynk virtual pins
+#define VIRTUAL_PIN_HEART_RATE V0
+#define VIRTUAL_PIN_TEMPERATURE V1
+#define VIRTUAL_PIN_LOCATION V2
+#define VIRTUAL_PIN_GLOVE_STATUS V3
+
+// LM35 temperature sensor pin
+#define TEMP_SENSOR_PIN 34 // Replace with the analog pin connected to LM35
+
+// GPS module setup
+TinyGPSPlus gps;
+HardwareSerial gpsSerial(1); // Use UART1 for GPS
+#define RXD2 16 // Define RX pin for GPS
+#define TXD2 17 // Define TX pin for GPS
+
+// IR sensor setup
+#define IR_SENSOR_PIN 35 // Analog pin connected to IR sensor
+#define GLOVE_THRESHOLD 4.0 // Threshold distance in cm for detecting glove
+
+// Variables
+uint32_t lastReportTime = 0;
+String currentLatitude = "N/A"; // Store the latest latitude
+String currentLongitude = "N/A"; // Store the latest longitude
+float currentTemperature = 0.0; // Store the latest temperature
+bool heartVisible = true; // For animating the heart icon
+bool isGloveOn = true; // State of the glove
+int currentBPM = 0; // Store heart rate value
+
+void setup() {
+  // Start serial communication
+  Serial.begin(115200);
+  delay(1000);
+
+  // Initialize WiFi and Blynk
+  Serial.println("Connecting to WiFi...");
+  WiFi.begin(ssid, pass);
+  while (WiFi.status() != WL_CONNECTED) {
+    delay(500);
+    Serial.print(".");
+  }
+  Serial.println("\nWiFi connected");
+  Blynk.begin(auth, ssid, pass);
+
+  // Initialize OLED display
+  if (!display.begin(SSD1306_SWITCHCAPVCC, 0x3C)) {
+    Serial.println("SSD1306 allocation failed");
+    while (1);
+  }
+  display.clearDisplay();
+  display.setTextSize(1);
+  display.setTextColor(SSD1306_WHITE);
+  display.setCursor(0, 0);
+  display.println("System Initializing...");
+  display.display();
+  delay(2000);
+  display.clearDisplay();
+
+  // Initialize GPS module
+  gpsSerial.begin(9600, SERIAL_8N1, RXD2, TXD2);
+  Serial.println("GPS module initialized.");
+
+  // Initialize IR sensor
+  pinMode(IR_SENSOR_PIN, INPUT);
+  Serial.println("IR sensor initialized.");
+
+  // Initialize Pulse Sensor
+  pulseSensor.analogInput(PULSE_PIN);
+  pulseSensor.setThreshold(550); // Optional sensitivity setting
+  if (pulseSensor.begin()) {
+    Serial.println("Pulse Sensor initialized.");
+  } else {
+    Serial.println("Pulse Sensor initialization failed!");
+  }
+}
+
+int getAccurateHeartRate() {
+  int readings[10];
+  int validReadings = 0;
+  int sum = 0;
+
+  for (int i = 0; i < 10; i++) {
+    if (pulseSensor.sawStartOfBeat()) {
+      int bpm = pulseSensor.getBeatsPerMinute();
+      if (bpm > 0 && bpm <= 150) {
+        readings[validReadings++] = bpm;
+        sum += bpm;
+      }
+    }
+    delay(100); // Allow time for new reading
+  }
+
+  if (validReadings > 0) {
+    return sum / validReadings; // Return average of valid readings
+  } else {
+    return 0; // No valid readings found
+  }
+}
+
+void loop() {
+  // Update Blynk
+  Blynk.run();
+
+  // Check glove status using IR sensor
+  int irValue = analogRead(IR_SENSOR_PIN);
+  float distance = (irValue / 4095.0) * 100.0;
+  if (distance <= GLOVE_THRESHOLD) {
+    if (!isGloveOn) {
+      isGloveOn = true;
+      Blynk.virtualWrite(VIRTUAL_PIN_GLOVE_STATUS, "Glove is on hand");
+    }
+  } else {
+    if (isGloveOn) {
+      isGloveOn = false;
+      Blynk.virtualWrite(VIRTUAL_PIN_GLOVE_STATUS, "Glove is missing");
+      Blynk.logEvent("glove_missing", "Alert: Glove is missing!");
+      currentBPM = 0; // Set heart rate to 0 if glove is missing
+      Blynk.virtualWrite(VIRTUAL_PIN_HEART_RATE, currentBPM);
+    }
+  }
+
+  // Process pulse sensor data
+  if (isGloveOn) {
+    int bpm = getAccurateHeartRate();
+    if (bpm > 0) {
+      currentBPM = bpm;
+    }
+    Blynk.virtualWrite(VIRTUAL_PIN_HEART_RATE, currentBPM);
+  }
+
+  // Check if it’s time to report other sensor data
+  if (millis() - lastReportTime > 1000) { // Report every 1 second
+    lastReportTime = millis();
+
+    // Get temperature
+    int tempAnalogValue = analogRead(TEMP_SENSOR_PIN);
+    float voltage = (tempAnalogValue / 4095.0) * 3.3; // Convert ADC value to voltage
+    currentTemperature = voltage * 100.0; // LM35 outputs 10mV per degree Celsius
+    Blynk.virtualWrite(VIRTUAL_PIN_TEMPERATURE, currentTemperature);
+
+    // Get GPS location
+    while (gpsSerial.available() > 0) {
+      if (gps.encode(gpsSerial.read())) {
+        if (gps.location.isValid()) {
+          currentLatitude = "Lat: " + String(gps.location.lat(), 6);
+          currentLongitude = "Lng: " + String(gps.location.lng(), 6);
+          Blynk.virtualWrite(VIRTUAL_PIN_LOCATION, currentLatitude + ", " + currentLongitude);
+        } else {
+          currentLatitude = "Invalid Latitude";
+          currentLongitude = "Invalid Longitude";
+          Blynk.virtualWrite(VIRTUAL_PIN_LOCATION, "Invalid Location");
+        }
+      }
+    }
+
+    // Update OLED display
+    display.clearDisplay();
+    display.setCursor(0, 0);
+    display.println("Heart Rate:");
+    if (currentBPM > 0) {
+      display.print(currentBPM);
+      display.println(" bpm");
+    } else {
+      display.println("No Data");
+    }
+    display.setCursor(0, 16);
+    display.print("Temp: ");
+    display.print(currentTemperature);
+    display.println(" C");
+    display.setCursor(0, 32);
+    display.println(currentLatitude);
+    display.setCursor(0, 48);
+    display.println(currentLongitude);
+    display.display();
+  }
+
+  delay(20); // Short delay to avoid excessive processing
+}
