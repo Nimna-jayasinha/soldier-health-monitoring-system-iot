@@ -64,6 +64,14 @@ This system helps track vital signs of soldiers on the field, ensuring real-time
 
 ---
 
+## 💸 Component Billing Overview
+
+A summarized cost sheet of all hardware used in the project:
+
+![Component Billing Sheet](./Images/components_billing.png)
+
+---
+
 ## 🔌 Wiring Guide
 
 For detailed circuit connections and sensor pin configurations, refer to the [Wiring Guide](./Docs/wiring_guide.md).
