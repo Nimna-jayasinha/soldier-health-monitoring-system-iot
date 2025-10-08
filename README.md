@@ -1,6 +1,6 @@
 # Military Soldier Health Monitoring System (KENG-CV #007) 🔰
 
-A real-time IoT-based health and safety monitoring system for military soldiers. This wearable device, powered by an ESP32 microcontroller, continuously tracks a soldier’s vital signs — including heart rate, body temperature, GPS location, and glove status — and transmits the data to a centralized Blynk Cloud dashboard for real-time monitoring and safety alerts.
+A real time IoT-based health and safety monitoring system for military soldiers. This wearable device, powered by an ESP32 microcontroller, continuously tracks a soldier’s vital signs including heart rate, body temperature, GPS location, and glove status and transmits the data to a centralized Blynk Cloud dashboard for real time monitoring and safety alerts.
 
 ---
 
@@ -36,7 +36,6 @@ This system helps track vital signs of soldiers on the field, ensuring real-time
 
 - C++ (Arduino IDE)
 - Blynk IoT Platform
-- C++ (Arduino IDE)
 - Required Libraries:
   - `WiFi.h`, `Wire.h`, `BlynkSimpleEsp32.h`
   - `Adafruit_SSD1306`, `Adafruit_GFX`
