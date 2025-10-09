@@ -16,6 +16,7 @@ This system helps track vital signs of soldiers on the field, ensuring real-time
 - 🧤 Glove detection via IR sensor for safety compliance
 - ⬛ OLED display for local data view
 - 🖥📊📉 Blynk dashboard for live cloud-based monitoring
+- ☀️ Solar-Assisted Self-Charging
 
 ---
 
