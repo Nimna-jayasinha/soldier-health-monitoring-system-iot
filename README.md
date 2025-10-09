@@ -81,6 +81,7 @@ For detailed circuit connections and sensor pin configurations, refer to the [Wi
 ## ☁️ Blynk Dashboard
 
 ![Dashboard Preview](Images/Dashboard.jpeg)
+![Dashboard Preview](Images/Configuration.png)
 
 ---
 ## 🌐 Blynk Dashboard Setup
