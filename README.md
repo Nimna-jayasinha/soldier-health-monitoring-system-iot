@@ -138,6 +138,8 @@ This project was developed as part of:
 | Eranjana Weerasinghe              | Weerasinghe A. E. K. P.               | **Hardware Integrator** – Conceived the core idea and served as the inspiration behind the entire project. Designed the physical glove’s user experience and interface, led the glove’s external design aesthetics, and managed internal wiring and component integration for the wearable unit. |
 | Nimna Jayasinha                   | Jayasinha W. M. S. S. N.              | **Web Developer** – Developed the project’s companion website and actively contributed to glove assembly by assisting with fitting, sensor wiring, and component setup. Played a key role in ideation and supported the glove's design process. |
 | Geenuth Perera                    | Perera W. G. D.                       | **Documentation & Logistics** – Created the project proposal, handled component sourcing and billing sheet preparation. |
+| Vidara Karannagoda                | Karannagoda K. V. R.                  | **Presentation & Support** – Helped in documentation and provided a Plaster of Paris human dummy to demonstrate glove wearability. |
+| Chamodika                         | Chamodika J. W. C.                    | **Documentation Assistant** – Supported report writing and formatting tasks. |
 
 
 ---
